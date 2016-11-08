@@ -1,9 +1,9 @@
 [linuxserverurl]: https://linuxserver.io
 [forumurl]: https://forum.linuxserver.io
-[ircurl]: https://www.linuxserver.io/index.php/irc/
-[podcasturl]: https://www.linuxserver.io/index.php/category/podcast/
+[ircurl]: https://www.linuxserver.io/irc/
+[podcasturl]: https://www.linuxserver.io/podcast/
 
-[![linuxserver.io](https://www.linuxserver.io/wp-content/uploads/2015/06/linuxserver_medium.png)][linuxserverurl]
+[![linuxserver.io](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver_medium.png)][linuxserverurl]
 
 The [LinuxServer.io][linuxserverurl] team brings you another container release featuring easy user mapping and community support. Find us for support at:
 * [forum.linuxserver.io][forumurl]
@@ -40,7 +40,13 @@ Add one of the tags,  if required,  to the linuxserver/kodi-headless line of the
 + **Krypton** : currently in beta and using ubuntu xenial.
 
 
-**Parameters**
+## Parameters
+
+`The parameters are split into two halves, separated by a colon, the left hand side representing the host and the right the container side. 
+For example with a port -p external:internal - what this shows is the port mapping from internal to external of the container.
+So -p 8080:80 would expose port 80 from inside the container to be accessible from the host's IP on port 8080
+http://192.168.x.x:8080 would show you what's running INSIDE the container on port 80.`
+
 
 * `-p 8080` - webui port
 * `-p 9777/udp` - esall interface port
@@ -74,6 +80,14 @@ If you intend to use this kodi instance to perform library tasks other than mere
 
 * Shell access whilst the container is running: `docker exec -it kodi-headless /bin/bash`
 * To monitor the logs of the container in realtime: `docker logs -f kodi-headless`
+
+* container build-date 
+
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' kodi-headless`
+
+* image build-date
+
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/kodi-headless`
 
 ## Credits
 Various members of the xbmc/kodi community for patches and advice.
