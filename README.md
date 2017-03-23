@@ -1,7 +1,9 @@
 [linuxserverurl]: https://linuxserver.io
 [forumurl]: https://forum.linuxserver.io
-[ircurl]: https://www.linuxserver.io/irc/
-[podcasturl]: https://www.linuxserver.io/podcast/
+[ircurl]: https://www.linuxserver.io/index.php/irc/
+[podcasturl]: https://www.linuxserver.io/index.php/category/podcast/
+[appurl]: https://kodi.tv/
+[hub]: https://hub.docker.com/r/linuxserver/kodi-headless/
 
 [![linuxserver.io](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver_medium.png)][linuxserverurl]
 
@@ -12,12 +14,11 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 
 # linuxserver/kodi-headless
 [![](https://images.microbadger.com/badges/image/linuxserver/kodi-headless.svg)](http://microbadger.com/images/linuxserver/kodi-headless "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/kodi-headless.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/kodi-headless.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-kodi-headless)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-kodi-headless/)
-[hub]: https://hub.docker.com/r/linuxserver/kodi-headless/
 
 A headless install of kodi in a docker container, most useful for a mysql setup of kodi to allow library updates to be sent without the need for a player system to be permanently on.
 
-[![kodi](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kodi-banner.png)][kodiurl]
-[kodiurl]: https://kodi.tv/
+[![kodi](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kodi-banner.png)][appurl]
+
 ## Usage
 
 ```
@@ -31,22 +32,16 @@ linuxserver/kodi-headless
 
 You can choose between ,using tags, various main versions of kodi.
 
-Add one of the tags,  if required,  to the linuxserver/kodi-headless line of the run/create command in the following format, linuxserver/kodi-headless:Jarvis
+Add one of the tags,  if required,  to the linuxserver/kodi-headless line of the run/create command in the following format, linuxserver/kodi-headless:Krypton
 
 #### Tags
 + **Helix**
 + **Isengard**
-+ **Jarvis** : current default branch
-+ **Krypton** : currently in beta and using ubuntu xenial.
++ **Jarvis**
++ **Krypton** : current default branch.
 
 
-## Parameters
-
-`The parameters are split into two halves, separated by a colon, the left hand side representing the host and the right the container side. 
-For example with a port -p external:internal - what this shows is the port mapping from internal to external of the container.
-So -p 8080:80 would expose port 80 from inside the container to be accessible from the host's IP on port 8080
-http://192.168.x.x:8080 would show you what's running INSIDE the container on port 80.`
-
+**Parameters**
 
 * `-p 8080` - webui port
 * `-p 9777/udp` - esall interface port
@@ -72,7 +67,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 Mysql/mariadb settings are entered by editing the file advancedsettings.xml which is found in the userdata folder of your /config/.kodi mapping. Many other settings are within this file also.
 
-The default user/password for the web interface and for apps like couchpotato etc to send updates is xbmc/xbmc.
+The default user/password for the web interface and for apps like couchpotato etc to send updates is kodi/kodi.
 
 If you intend to use this kodi instance to perform library tasks other than merely updating, eg. library cleaning etc, it is important to copy over the sources.xml from the host machine that you performed the initial library scan on to the userdata folder of this instance, otherwise database loss can and most likely will occur.
 
@@ -81,19 +76,14 @@ If you intend to use this kodi instance to perform library tasks other than mere
 * Shell access whilst the container is running: `docker exec -it kodi-headless /bin/bash`
 * To monitor the logs of the container in realtime: `docker logs -f kodi-headless`
 
-* container build-date 
-
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' kodi-headless`
-
-* image build-date
-
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/kodi-headless`
-
 ## Credits
 Various members of the xbmc/kodi community for patches and advice.
 
 ## Versions
 
++ **22.02.17:** Bump Krypton to 17.1.
++ **22.02.17:** Change default webui user/pw to kodi/kodi.
++ **05.02.17:** Move Krypton to default branch.
 + **20.09.16:** Add kodi-send and fix var cache samba permissions.
 + **10.09.16:** Add layer badge to README..
 + **02.09.16:** Rebase to alpine linux.
